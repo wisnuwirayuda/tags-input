@@ -4,7 +4,10 @@
     
     <!-- <div v-if="!tags.length">You have no any tags</div> -->
 
-    <div v-for="tag in tags">{{ tag }}</div>
+    <div v-for="(tag, index) in tags">
+        {{ tag }}
+        <a href="#" @click.prevent="removeTag(index)">&times;</a>
+    </div>
     
     <!-- <input type="text" v-bind:value="newTag" /> -->
     <!-- <input 
@@ -25,9 +28,10 @@
     /> -->
     <input 
         type="text" 
-        v-model.lazy="newTag"
-        @keydown.enter="tags.push(newTag)" 
-        @keydown.tab.prevent="tags.push(newTag)" 
+        v-model.trim="newTag"
+        @keydown.enter="addNewTag" 
+        @keydown.tab.prevent="addNewTag"
+        @keydown.delete="removeLastTag"
     />
 
     <!-- <button v-on:click="tags.push(newTag)">OK</button> -->
@@ -39,12 +43,29 @@ export default {
     data: () => ({
         tags: ["Vue", "React", "Angular"],
         newTag: 'nuxt'
-    })
+    }),
 
     // data() {
     //     return {
     //         tags: ["Vue", "React", "Angular"]
     //     }
     // }
+
+    methods: {
+        addNewTag() {
+            if (this.newTag) {
+                this.tags.push(this.newTag)
+                this.newTag = ""
+            }
+        },
+        removeTag(index) {
+            this.tags.splice(index, 1);
+        },
+        removeLastTag() {
+            if (this.newTag.length === 0) {
+                this.removeTag(this.tags.length - 1)
+            }
+        }
+    }
 }
 </script>
