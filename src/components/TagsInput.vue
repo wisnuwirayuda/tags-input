@@ -13,11 +13,21 @@
         v-on:keydown.enter="tags.push($event.target.value)" 
         v-on:keydown.tab.prevent="tags.push($event.target.value)" 
     /> -->
-    <input 
+
+    <hr>
+    <pre>{{ newTag }}</pre>
+    <!-- <input 
         type="text" 
         :value="newTag" 
-        @keydown.enter="tags.push($event.target.value)" 
-        @keydown.tab.prevent="tags.push($event.target.value)" 
+        @input="newTag = $event.target.value"
+        @keydown.enter="tags.push(newTag)" 
+        @keydown.tab.prevent="tags.push(newTag)" 
+    /> -->
+    <input 
+        type="text" 
+        v-model.lazy="newTag"
+        @keydown.enter="tags.push(newTag)" 
+        @keydown.tab.prevent="tags.push(newTag)" 
     />
 
     <!-- <button v-on:click="tags.push(newTag)">OK</button> -->
