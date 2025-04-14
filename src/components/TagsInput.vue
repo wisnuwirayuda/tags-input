@@ -27,23 +27,23 @@
         @keydown.tab.prevent="tags.push(newTag)" 
     /> -->
 
-    <input 
-        type="text" 
-        v-model.trim="newTag"
-        @keydown.enter="addNewTag" 
-        @keydown.tab.prevent="addNewTag"
-        @keydown.delete="removeLastTag"
-        :class="tags.includes(newTag) ? 'tag-exists' : ''"
-    />
-
     <!-- <input 
         type="text" 
         v-model.trim="newTag"
         @keydown.enter="addNewTag" 
         @keydown.tab.prevent="addNewTag"
         @keydown.delete="removeLastTag"
-        :class="{ 'tag-exists': tags.includes(newTag) }"
+        :class="tags.includes(newTag) ? 'tag-exists' : ''"
     /> -->
+
+    <input 
+        type="text" 
+        v-model.trim="newTag"
+        @keydown.enter="addNewTag" 
+        @keydown.tab.prevent="addNewTag"
+        @keydown.delete="removeLastTag"
+        :class="{ 'tag-exists': isTagExists }"
+    />
 
     <!-- <button v-on:click="tags.push(newTag)">OK</button> -->
 </template>
@@ -62,9 +62,15 @@ export default {
     //     }
     // }
 
+    computed: {
+        isTagExists() {
+            return this.tags.includes(this.newTag);
+        }
+    },
+
     methods: {
         addNewTag() {
-            if (this.newTag) {
+            if (this.newTag && !this.isTagExists) {
                 this.tags.push(this.newTag)
                 this.newTag = ""
             }
