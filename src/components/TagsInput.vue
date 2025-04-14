@@ -68,6 +68,15 @@ export default {
         }
     },
 
+    watch: {
+        newTag (newVal) {
+            if (newVal.indexOf(",") > -1) {
+                this.newTag = newVal.slice(0, -1);
+                this.addNewTag();
+            }
+        }
+    },
+
     methods: {
         addNewTag() {
             if (this.newTag && !this.isTagExists) {
