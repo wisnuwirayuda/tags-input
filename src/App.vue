@@ -1,4 +1,9 @@
 <script>
+export default {
+  data: () => ({
+    jsFrameworks: ["React.js", "Vue.js", "Angular"]
+  })
+}
 // import TagsInput from './components/TagsInput.vue';
 // export default {
 //   components: { TagsInput }
@@ -7,7 +12,7 @@
 
 <template>
   <h1>Hello World</h1>
-  <tags-input></tags-input>
+  <tags-input :selectedTags="jsFrameworks"></tags-input>
   <!-- <tags-input /> -->
   <!-- <TagsInput /> -->
 </template>

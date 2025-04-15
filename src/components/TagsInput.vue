@@ -53,11 +53,20 @@
 
 <script>
 export default {
+    props: {
+        selectedTags: {
+            type: Array,
+            default: () => []
+        }
+    },
+
     // Narrow Func
-    data: () => ({
-        tags: ["Vue", "React", "Angular"],
-        newTag: 'nuxt'
-    }),
+    data() {
+        return {
+            tags: [...this.selectedTags],
+            newTag: ''
+        }
+    },
 
     // data() {
     //     return {
